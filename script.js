@@ -118,3 +118,53 @@ window.addEventListener('load', () => {
         document.body.style.opacity = '1';
     }, 100);
 });
+
+// --- Contact Form Submission Handler ---
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('contact-form-status');
+    const submitBtn = document.getElementById('contact-submit-btn');
+
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default page reload
+
+            const formData = new FormData(form);
+            
+            // Update button and status for user feedback
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            status.textContent = '';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    status.textContent = "Thank you! Your message has been sent.";
+                    status.style.color = 'green';
+                    form.reset(); // Clear the form fields
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.textContent = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.textContent = "Oops! There was a problem submitting your form.";
+                        }
+                        status.style.color = 'red';
+                    })
+                }
+            }).catch(error => {
+                status.textContent = "Oops! There was a problem submitting your form.";
+                status.style.color = 'red';
+            }).finally(() => {
+                // Re-enable the button after submission attempt
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            });
+        });
+    }
+});
