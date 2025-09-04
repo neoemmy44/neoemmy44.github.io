@@ -82,7 +82,7 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav">
         <ul class="mobile-menu">
-            <li><a href="#" onclick="showSection('home'); closeMobileMenu();">Home</a></li>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
             
             <li class="mobile-dropdown">
                 <button class="mobile-dropdown-toggle">
@@ -90,10 +90,10 @@
                     <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </button>
                 <div class="mobile-dropdown-content">
-                    <a href="#" onclick="showSection('history'); closeMobileMenu();">History</a>
-                    <a href="#" onclick="showSection('mission'); closeMobileMenu();">Mission & Vision</a>
-                    <a href="#" onclick="showSection('administration'); closeMobileMenu();">Administration</a>
-                    <a href="#" onclick="showSection('staff'); closeMobileMenu();">Staff Directory</a>
+                    <a href="#" onclick="showSection('history')">History</a>
+                    <a href="#" onclick="showSection('mission')">Mission & Vision</a>
+                    <a href="#" onclick="showSection('administration')">Administration</a>
+                    <a href="#" onclick="showSection('staff')">Staff Directory</a>
                 </div>
             </li>
 
@@ -103,10 +103,10 @@
                     <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </button>
                 <div class="mobile-dropdown-content">
-                    <a href="#" onclick="showSection('curriculum'); closeMobileMenu();">Curriculum</a>
-                    <a href="#" onclick="showSection('subjects'); closeMobileMenu();">Subjects & Departments</a>
-                    <a href="#" onclick="showSection('timetable'); closeMobileMenu();">Academic Calendar</a>
-                    <a href="#" onclick="showSection('library'); closeMobileMenu();">Library & Resources</a>
+                    <a href="#" onclick="showSection('curriculum')">Curriculum</a>
+                    <a href="#" onclick="showSection('subjects')">Subjects & Departments</a>
+                    <a href="#" onclick="showSection('timetable')">Academic Calendar</a>
+                    <a href="#" onclick="showSection('library')">Library & Resources</a>
                 </div>
             </li>
 
@@ -116,10 +116,10 @@
                     <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </button>
                 <div class="mobile-dropdown-content">
-                    <a href="#" onclick="showSection('admission-process'); closeMobileMenu();">Admission Process</a>
-                    <a href="#" onclick="showSection('application'); closeMobileMenu();">Application Form</a>
-                    <a href="#" onclick="showSection('fees'); closeMobileMenu();">Fees & Requirements</a>
-                    <a href="#" onclick="showSection('scholarships'); closeMobileMenu();">Scholarships</a>
+                    <a href="#" onclick="showSection('admission-process')">Admission Process</a>
+                    <a href="#" onclick="showSection('application')">Application Form</a>
+                    <a href="#" onclick="showSection('fees')">Fees & Requirements</a>
+                    <a href="#" onclick="showSection('scholarships')">Scholarships</a>
                 </div>
             </li>
 
@@ -129,10 +129,10 @@
                     <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </button>
                 <div class="mobile-dropdown-content">
-                    <a href="#" onclick="showSection('student-life'); closeMobileMenu();">Student Life</a>
-                    <a href="#" onclick="showSection('clubs'); closeMobileMenu();">Clubs & Societies</a>
-                    <a href="#" onclick="showSection('sports'); closeMobileMenu();">Sports</a>
-                    <a href="#" onclick="showSection('council'); closeMobileMenu();">Student Council</a>
+                    <a href="#" onclick="showSection('student-life')">Student Life</a>
+                    <a href="#" onclick="showSection('clubs')">Clubs & Societies</a>
+                    <a href="#" onclick="showSection('sports')">Sports</a>
+                    <a href="#" onclick="showSection('council')">Student Council</a>
                 </div>
             </li>
 
@@ -142,14 +142,14 @@
                     <i class="fas fa-chevron-down dropdown-arrow"></i>
                 </button>
                 <div class="mobile-dropdown-content">
-                    <a href="#" onclick="showSection('school-news'); closeMobileMenu();">School News</a>
-                    <a href="#" onclick="showSection('announcements'); closeMobileMenu();">Announcements</a>
-                    <a href="#" onclick="showSection('events'); closeMobileMenu();">Upcoming Events</a>
-                    <a href="#" onclick="showSection('gallery'); closeMobileMenu();">Gallery</a>
+                    <a href="#" onclick="showSection('school-news')">School News</a>
+                    <a href="#" onclick="showSection('announcements')">Announcements</a>
+                    <a href="#" onclick="showSection('events')">Upcoming Events</a>
+                    <a href="#" onclick="showSection('gallery')">Gallery</a>
                 </div>
             </li>
 
-            <li><a href="#" onclick="showSection('contact'); closeMobileMenu();">Contact Us</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contact Us</a></li>
         </ul>
     </nav>
 
@@ -940,22 +940,29 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
                 <div class="form-container">
                     <h3>Send us a Message</h3>
-                    <form action="https://formspree.io/f/movnplwp" method="post">
+                    <!-- 
+                        FIXES APPLIED HERE:
+                        1. Added id="contact-form" to the <form> tag.
+                        2. Added 'name' attributes to all inputs, select, and textarea.
+                        3. Added id="contact-submit-btn" to the button.
+                        4. Added the status paragraph below the button.
+                    -->
+                    <form id="contact-form" action="https://formspree.io/f/movnplwp" method="POST">
                         <div class="form-group">
                             <label for="contact-name">Full Name *</label>
-                            <input type="text" id="contact-name" required>
+                            <input type="text" id="contact-name" name="name" required>
                         </div>
                         <div class="form-group">
                             <label for="contact-email">Email Address *</label>
-                            <input type="email" id="contact-email" required>
+                            <input type="email" id="contact-email" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="contact-phone">Phone Number</label>
-                            <input type="tel" id="contact-phone">
+                            <input type="tel" id="contact-phone" name="phone">
                         </div>
                         <div class="form-group">
                             <label for="contact-subject">Subject *</label>
-                            <select id="contact-subject" required>
+                            <select id="contact-subject" name="subject" required>
                                 <option value="">Select Subject</option>
                                 <option value="admission">Admission Inquiry</option>
                                 <option value="academic">Academic Information</option>
@@ -965,9 +972,10 @@
                         </div>
                         <div class="form-group">
                             <label for="contact-message">Message *</label>
-                            <textarea id="contact-message" rows="5" required></textarea>
+                            <textarea id="contact-message" name="message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" id="contact-submit-btn" class="btn btn-primary">Send Message</button>
+                        <p id="contact-form-status" style="text-align: center; margin-top: 1rem;"></p>
                     </form>
                 </div>
                 
