@@ -135,6 +135,42 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // --- 7. 3D Carousel Gallery ---
+    const carousel = document.querySelector('.carousel');
+    if (carousel) {
+        const slides = Array.from(carousel.children);
+        const nextButton = document.querySelector('.carousel-container .next');
+        const prevButton = document.querySelector('.carousel-container .prev');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev-slide', 'next-slide');
+
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
+                    slide.classList.add('prev-slide');
+                } else if (index === (currentIndex + 1) % slides.length) {
+                    slide.classList.add('next-slide');
+                }
+            });
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        });
+
+        // Set initial state
+        updateCarousel();
+    }
 });
 
 // --- Optional: Page Load Animation ---

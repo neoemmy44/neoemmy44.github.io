@@ -239,16 +239,17 @@ header {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(30,60,114,0.8), rgba(42,82,152,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e8f4f8" width="1200" height="600"/><circle fill="%23d1ecf1" cx="300" cy="150" r="80"/><circle fill="%23b8e0e8" cx="900" cy="400" r="120"/><rect fill="%23a8d8e0" x="600" y="250" width="100" height="100" rx="10"/></svg>');
+    background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('images/hero-background.jpg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
-    padding-top: 80px; /* Offset for fixed header */
+    padding-top: 80px; 
 }
 
 .hero-content {
@@ -387,8 +388,9 @@ main {
 }
 
 .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex; /* Changed from 'grid' */
+    flex-wrap: wrap; /* Allows items to wrap to new lines */
+    justify-content: center; /* This centers the cards */
     gap: 2rem;
     margin: 2rem 0;
 }
@@ -400,6 +402,7 @@ main {
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #e9ecef;
+    flex: 0 1 320px; /* Defines the card size for the flex layout */
 }
 
 .card:hover {
@@ -414,8 +417,9 @@ main {
 }
 
 .news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    display: flex; /* Changed from 'grid' */
+    flex-wrap: wrap; /* Allows items to wrap */
+    justify-content: center; /* This centers the news items */
     gap: 2rem;
 }
 
@@ -425,6 +429,7 @@ main {
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    flex: 0 1 350px; /* Defines the news item size for the flex layout */
 }
 
 .news-item:hover {
@@ -641,4 +646,235 @@ footer {
     .mobile-dropdown-content a {
         padding: 0.6rem 2rem;
     }
+}
+
+/* --- Stylish Slideshow Styles --- */
+
+/* Add a background to the gallery content area for better separation */
+#gallery .section-content {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.slideshow-container {
+    max-width: 900px;
+    position: relative;
+    margin: auto;
+    border-radius: 15px; /* Softer corners */
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Deeper, softer shadow */
+}
+
+.slide {
+    display: none;
+    overflow: hidden; /* Crucial for the zoom effect */
+}
+
+.slide img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+/* Ken Burns Effect: Slow zoom and pan animation */
+@keyframes kenburns {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+    100% {
+        transform: scale(1.15) translate(-3%, 3%);
+    }
+}
+
+/* Apply the animation only to the image of the currently visible slide */
+.slide[style*="display: block"] img {
+    animation: kenburns 20s ease-out forwards;
+}
+
+.gallery-caption {
+    text-align: center;
+    padding: 2rem 1rem 1rem; /* More vertical space */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%); /* Softer gradient */
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Perfect vertical centering */
+    width: 45px;
+    height: 45px;
+    color: white;
+    font-size: 18px;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    border-radius: 50%; /* Circular buttons */
+    user-select: none;
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Hide by default */
+}
+
+/* Show buttons when hovering over the slideshow container */
+.slideshow-container:hover .prev,
+.slideshow-container:hover .next {
+    opacity: 0.8;
+}
+
+.prev {
+    left: 15px;
+}
+
+.next {
+    right: 15px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.6);
+    opacity: 1;
+}
+
+/* Dots */
+.dots-container {
+    text-align: center;
+    padding: 20px 0 10px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dot.active, .dot:hover {
+    background-color: #1e3c72; /* Use a theme color */
+    transform: scale(1.2);
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+/* --- 3D Carousel Gallery Styles --- */
+.carousel-container {
+    position: relative;
+    width: 80%;
+    max-width: 600px; /* Adjust max-width as needed */
+    height: 400px; /* Fixed height for the container */
+    margin: 2rem auto;
+    perspective: 1000px; /* This creates the 3D space */
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d; /* Allows children to be in 3D space */
+}
+
+.carousel .slide {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #333;
+}
+
+.carousel .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the slide area without distortion */
+}
+
+/* --- States for the slides --- */
+
+/* Center, large slide */
+.carousel .slide.active {
+    transform: translateZ(0) scale(1.2); /* Bring forward and make larger */
+    opacity: 1;
+    z-index: 10;
+}
+
+/* Left, smaller slide */
+.carousel .slide.prev-slide {
+    transform: translateX(-70%) translateZ(-250px) rotateY(45deg);
+    opacity: 0.6;
+    z-index: 5;
+}
+
+/* Right, smaller slide */
+.carousel .slide.next-slide {
+    transform: translateX(70%) translateZ(-250px) rotateY(-45deg);
+    opacity: 0.6;
+    z-index: 5;
+}
+
+/* Hidden slides */
+.carousel .slide:not(.active):not(.prev-slide):not(.next-slide) {
+    transform: scale(0);
+    opacity: 0;
+}
+
+/* Navigation Buttons */
+.carousel-container .prev,
+.carousel-container .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    color: #1e3c72;
+    font-size: 24px;
+    border-radius: 50%;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+}
+
+.carousel-container .prev {
+    left: -25px;
+}
+
+.carousel-container .next {
+    right: -25px;
+}
+
+.carousel-container .prev:hover,
+.carousel-container .next:hover {
+    background-color: white;
 }
